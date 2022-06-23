@@ -1,0 +1,22 @@
+{
+  "retries": {
+    "runMode": 1
+  },
+  "env": {
+    "aioTests": {
+      "enableReporting": true,
+      "cloud": {
+        "apiKey": ""
+      },
+      "jiraProjectId": "NVTES",
+      "cycleDetails": {
+        "createNewCycle": false,
+        "cycleName": "Cypress nightly runs",
+        "cycleKey": "NVTES-CY-64"
+      },
+      "addNewRun" : true,
+      "addAttachmentToFailedCases": false,
+      "createNewRunForRetries": true
+    }
+  }
+}

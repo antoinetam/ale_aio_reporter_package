@@ -1,0 +1,22 @@
+{
+  "env": {
+    "aioTests": {
+      "enableReporting": true,
+      "hosted" : {
+        "jiraUrl": "https://jira8.aioreports.com",
+        "jiraPAT": "",
+        "jiraUsername": "",
+        "jiraPassword": ""
+      },
+      "jiraProjectId": "NVTES",
+      "cycleDetails": {
+        "createNewCycle": true,
+        "cycleName": "Cypress Nightly Run ",
+        "cycleKey": "NVTES-CY-2"
+      },
+      "addNewRun": false,
+      "addAttachmentToFailedCases": false,
+      "createNewRunForRetries": false
+    }
+  }
+}
