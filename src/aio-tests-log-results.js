@@ -213,7 +213,7 @@ function getAIORunStatus(cypressStatusString) {
         case "passed":
             return "Passed";
         default:
-            return "Not Run";
+            return "NA";
     }
 }
 
