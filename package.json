@@ -1,5 +1,5 @@
 {
-  "name": "cypress-aiotests-reporter",
+  "name": "ale-aio-reporter_package",
   "version": "1.0.4",
   "description": "Plugin to report cypress results to AIO Tests Jira",
   "main": "src/index.js",
@@ -8,10 +8,7 @@
     "semantic-release": "semantic-release"
   },
   "keywords": [
-    "aiotests",
-    "cypress",
-    "report",
-    "jira"
+    "ale"
   ],
   "author": "Navarambh Software",
   "license": "MIT",
@@ -29,6 +26,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aiotests/cypress-aiotests-reporter.git"
+    "url": "https://github.com/antoinetam/ale_aio_reporter_package"
   }
 }
