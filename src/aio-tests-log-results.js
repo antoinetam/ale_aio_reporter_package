@@ -89,7 +89,7 @@ function reportAllAttempts(config, key, attemptData, id, screenshots) {
 function postResult(aioConfig, caseKey, attemptData, id, screenshots) {
     let data = {
         "testRunStatus": getAIORunStatus(attemptData.state),
-        "effort": attemptData.wallClockDuration,
+        "effort": attemptData.wallClockDuration/1000,
         "isAutomated": true
     };
     if (attemptData.error) {
