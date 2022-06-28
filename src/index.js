@@ -5,19 +5,19 @@ const date = new Date(Date.now())
 
 function getAIOConfig(config, reportError) {
     aioLogger.logStartEnd(" Determining config to use")
-    if (config.env.enableReporting != undefined) {
+    if (config.env.enableReporting != undefined && config.env.enableReporting!='' ) {
         config.env.aioTests.enableReporting = config.env.enableReporting
         aioLogger.log("Overwrite value enableReporting : " + config.env.enableReporting);
     }
-    if (config.env.jiraProjectId != undefined) {
+    if (config.env.jiraProjectId != undefined && config.env.jiraProjectId !='') {
         config.env.aioTests.jiraProjectId = config.env.jiraProjectId
         aioLogger.log("Overwrite value jiraProjectId : " + config.env.jiraProjectId);
     }
-    if (config.env.createNewCycle != undefined) {
+    if (config.env.createNewCycle != undefined && config.env.createNewCycle !='') {
         config.env.aioTests.cycleDetails.createNewCycle = config.env.createNewCycle
         aioLogger.log("Overwrite value createNewCycle : " + config.env.createNewCycle);
     }
-    if (config.env.cycleName != undefined) {
+    if (config.env.cycleName != undefined && config.env.cycleName !='') {
         if (config.env.cycleName.includes('%Date')) {
             var str = config.env.cycleName
             str = str.replace('%Date', date.toLocaleDateString("fr"))
@@ -26,19 +26,19 @@ function getAIOConfig(config, reportError) {
         config.env.aioTests.cycleDetails.cycleName = config.env.cycleName
         aioLogger.log("Overwrite value cycleName : " + config.env.cycleName);
     }
-    if (config.env.cycleKey != undefined) {
+    if (config.env.cycleKey != undefined && config.env.cycleKey !='') {
         config.env.aioTests.cycleDetails.cycleKey = config.env.cycleKey
         aioLogger.log("Overwrite value cycleKey : " + config.env.cycleKey);
     }
-    if (config.env.addNewRun != undefined) {
+    if (config.env.addNewRun != undefined && config.env.addNewRun !='') {
         config.env.aioTests.addNewRun = config.env.addNewRun
         aioLogger.log("Overwrite value addNewRun : " + config.env.addNewRun);
     }
-    if (config.env.addNewRun != undefined) {
+    if (config.env.addNewRun != undefined && config.env.addNewRun !='') {
         config.env.aioTests.createNewRunForRetries = config.env.createNewRunForRetries
         aioLogger.log("Overwrite value createNewRunForRetries : " + config.env.createNewRunForRetries);
     }
-    if (config.env.addAttachmentToFailedCases != undefined) {
+    if (config.env.addAttachmentToFailedCases != undefined && config.env.addAttachmentToFailedCases !='') {
         config.env.aioTests.addAttachmentToFailedCases = config.env.addAttachmentToFailedCases
         aioLogger.log("Overwrite value addAttachmentToFailedCases : " + config.env.addAttachmentToFailedCases);
     }
