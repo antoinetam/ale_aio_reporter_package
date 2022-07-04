@@ -8,6 +8,10 @@ const AioTestsLogger = {
         if(addReporter) console.log(chalk.hex('#0094a6').underline.bold('AIO Tests Reporter :'));
         console.error( ' - ' + chalk.red(text));
     },
+    warning: (text, addReporter) => {
+        if(addReporter) console.log(chalk.hex('#0094a6').underline.bold('AIO Tests Reporter :'));
+        console.warn( ' - ' + chalk.yellow(text));
+    },
     logStartEnd: (text) => {
         console.log( chalk.hex('#0094a6').bold("*".repeat(15) + '  AIO Tests Reporter :' + text + "  " + "*".repeat(15)));
     }

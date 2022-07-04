@@ -51,7 +51,7 @@ function getAIOConfig(config, reportError) {
         return config.env.aioTests;
     } else {
         if (!!reportError)
-            aioLogger.error("AIO Tests reporting is not enabled.  Please set env:{aioTests:{enableReporting:true}}", true);
+        aioLogger.warning("AIO Tests reporting is not enabled.  Please set env:{aioTests:{enableReporting:true}}", true);
     }
 }
 
