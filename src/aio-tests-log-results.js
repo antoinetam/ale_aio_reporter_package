@@ -23,10 +23,13 @@ function initAPIClient(aioConfig) {
         if (!!!aioConfig.hosted.jiraUrl) {
             aioLogger.error("Server hosting config does not specify jiraUrl.  Please add \"server\":{\"jiraUrl\":\"https://companyhostedjira.com/jira\"}")
         } else {
+            aioLogger.error("avant axios.create")
+
             aioAPIClient = axios.create({
                 baseURL: aioConfig.hosted.jiraUrl + '/rest/aio-tcms-api/1.0',
                 timeout: apiTimeout
             });
+            aioLogger.error("après axios.create")
             if (aioConfig.hosted.jiraUsername || process.env.JIRA_USERNAME) {
                 let jUsername = process.env.JIRA_USERNAME ? process.env.JIRA_USERNAME : aioConfig.hosted.jiraUsername;
                 let jPassword = process.env.JIRA_PASSWORD ? process.env.JIRA_PASSWORD : aioConfig.hosted.jiraPassword;
