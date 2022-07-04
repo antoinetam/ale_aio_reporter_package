@@ -164,7 +164,6 @@ function findResults(results) {
 const getOrCreateCycle = async (aioConfig) => {
     aioLogger.logStartEnd(" Determining cycle to update");
     initAPIClient(aioConfig);
-    aioLogger.logStartEnd(" init API CLient OK");
     if (!aioAPIClient) {
         return Promise.resolve("Please specify valid credentials to connect with AIO Tests.");
     }
@@ -176,7 +175,6 @@ const getOrCreateCycle = async (aioConfig) => {
         if (aioCycleConfig.createNewCycle) {
             let cycleTitle = aioCycleConfig.cycleName;
             var cycleAlreadyExist 
-            aioLogger.logStartEnd("Start récup des cycle");
             await aioAPIClient.get("/project/" + aioConfig.jiraProjectId + "/testcycle").then(function (response) {
                 response.data.items.forEach(items => {
                     //aioLogger.log("Cycle : " + items.title + ' - ' + items.key);
@@ -188,7 +186,6 @@ const getOrCreateCycle = async (aioConfig) => {
                     }
                 });
             })
-            aioLogger.logStartEnd("End récup des cycle");
             if (cycleAlreadyExist) {
                 return Promise.resolve("Cycle already exist", true)
             }

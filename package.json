@@ -1,6 +1,6 @@
 {
   "name": "ale-aio-reporter_package",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Plugin to report cypress results to AIO Tests Jira",
   "main": "src/index.js",
   "scripts": {
