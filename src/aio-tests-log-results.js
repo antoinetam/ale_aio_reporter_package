@@ -23,13 +23,10 @@ function initAPIClient(aioConfig) {
         if (!!!aioConfig.hosted.jiraUrl) {
             aioLogger.error("Server hosting config does not specify jiraUrl.  Please add \"server\":{\"jiraUrl\":\"https://companyhostedjira.com/jira\"}")
         } else {
-            
-            aioLogger.logStartEnd("avant");
             aioAPIClient = axios.create({
                 baseURL: aioConfig.hosted.jiraUrl + '/rest/aio-tcms-api/1.0',
                 timeout: apiTimeout
             });
-            aioLogger.logStartEnd("après");
             if (aioConfig.hosted.jiraUsername || process.env.JIRA_USERNAME) {
                 let jUsername = process.env.JIRA_USERNAME ? process.env.JIRA_USERNAME : aioConfig.hosted.jiraUsername;
                 let jPassword = process.env.JIRA_PASSWORD ? process.env.JIRA_PASSWORD : aioConfig.hosted.jiraPassword;
@@ -167,6 +164,7 @@ function findResults(results) {
 const getOrCreateCycle = async (aioConfig) => {
     aioLogger.logStartEnd(" Determining cycle to update");
     initAPIClient(aioConfig);
+    aioLogger.logStartEnd(" init API CLient OK");
     if (!aioAPIClient) {
         return Promise.resolve("Please specify valid credentials to connect with AIO Tests.");
     }
@@ -178,6 +176,7 @@ const getOrCreateCycle = async (aioConfig) => {
         if (aioCycleConfig.createNewCycle) {
             let cycleTitle = aioCycleConfig.cycleName;
             var cycleAlreadyExist 
+            aioLogger.logStartEnd("Start récup des cycle");
             await aioAPIClient.get("/project/" + aioConfig.jiraProjectId + "/testcycle").then(function (response) {
                 response.data.items.forEach(items => {
                     //aioLogger.log("Cycle : " + items.title + ' - ' + items.key);
@@ -189,6 +188,7 @@ const getOrCreateCycle = async (aioConfig) => {
                     }
                 });
             })
+            aioLogger.logStartEnd("End récup des cycle");
             if (cycleAlreadyExist) {
                 return Promise.resolve("Cycle already exist", true)
             }
