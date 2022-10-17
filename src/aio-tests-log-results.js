@@ -106,8 +106,12 @@ function postResult(aioConfig, caseKey, attemptData, id, screenshots) {
             }
         })
         .catch(err => {
-            if (err.response) {
-                aioLogger.error("Error reporting " + caseKey + " : Status Code - " + err.response.status + " - " + err.response.data);
+            if (data.testRunStatus == 'NA') {
+                aioLogger.log(`Skip Reporting ${caseKey}`);
+            } else {
+                if (err.response) {
+                    aioLogger.error("Error reporting " + caseKey + " : Status Code - " + err.response.status + " - " + err.response.data);
+                }
             }
         })
 }
