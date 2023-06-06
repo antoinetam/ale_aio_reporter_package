@@ -42,6 +42,12 @@ function getAIOConfig(config, reportError) {
         config.env.aioTests.addAttachmentToFailedCases = config.env.addAttachmentToFailedCases
         aioLogger.log("Overwrite value addAttachmentToFailedCases : " + config.env.addAttachmentToFailedCases);
     }
+    if (config.env.jiraUsername != undefined && config.env.jiraUsername !='') {
+        config.env.aioTests.hosted.jiraUsername = config.env.jiraUsername
+    }
+    if (config.env.jiraPassword != undefined && config.env.jiraPassword !='') {
+        config.env.aioTests.hosted.jiraPassword = config.env.jiraPassword
+    }
 
     if (Object.keys(config).includes('env') && Object.keys(config.env).includes('aioTests') && !!config.env.aioTests.enableReporting) {
         if (!!!config.env.aioTests.jiraProjectId && !!reportError) {

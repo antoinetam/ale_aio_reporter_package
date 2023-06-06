@@ -89,7 +89,7 @@ function reportAllAttempts(config, key, attemptData, id, screenshots) {
 function postResult(aioConfig, caseKey, attemptData, id, screenshots) {
     let data = {
         "testRunStatus": getAIORunStatus(attemptData.state),
-        "effort": attemptData.wallClockDuration/1000,
+        "effort": attemptData.wallClockDuration / 1000,
         "isAutomated": true
     };
     if (attemptData.error) {
@@ -178,18 +178,30 @@ const getOrCreateCycle = async (aioConfig) => {
         let aioCycleConfig = aioConfig.cycleDetails;
         if (aioCycleConfig.createNewCycle) {
             let cycleTitle = aioCycleConfig.cycleName;
-            var cycleAlreadyExist 
-            await aioAPIClient.get("/project/" + aioConfig.jiraProjectId + "/testcycle").then(function (response) {
-                response.data.items.forEach(items => {
-                    //aioLogger.log("Cycle : " + items.title + ' - ' + items.key);
-                    if (items.title == cycleTitle) {
-                        aioLogger.log("Cycle '"+cycleTitle+"' already exist with key : " + items.key);
-                        aioLogger.log("/!\\ Cycle creation aborted");
-                        aioCycleConfig["cycleKeyToReportTo"] = items.key;
-                        cycleAlreadyExist = true
-                    }
-                });
-            })
+            var cycleAlreadyExist
+            var isLast
+            let startAt = 0
+            let maxResults = 100
+            let count = 0
+            do {
+                 await aioAPIClient.get(`/project/${aioConfig.jiraProjectId}/testcycle?startAt=${startAt}&maxResults=${maxResults}`).then(function (response) {
+                    isLast = response.data.isLast
+                    startAt = startAt+100
+                    aioLogger.log("startAt : "+startAt);
+
+                    response.data.items.forEach(items => {
+                        if (items.title == cycleTitle) {
+                            aioLogger.log("Cycle '" + cycleTitle + "' already exist with key : " + items.key);
+                            aioLogger.log("/!\\ Cycle creation aborted");
+                            aioCycleConfig["cycleKeyToReportTo"] = items.key;
+                            cycleAlreadyExist = true
+                        }
+                    });
+                })
+                count++
+            }
+            while (isLast !== true && count<20);
+
             if (cycleAlreadyExist) {
                 return Promise.resolve("Cycle already exist", true)
             }
